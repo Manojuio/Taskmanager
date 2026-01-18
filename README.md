@@ -1,155 +1,154 @@
-# Real-Time Collaboration & Task Management Backend
 
-A backend-heavy system for managing workspaces, projects, and tasks with authentication, role-based access control, and clean backend architecture.
+# Taskmanager – Full Stack Application
+
+A full-stack task and project management application with authentication, workspaces, projects, and tasks.
+
+Built to practice real-world backend + frontend integration.
 
 ---
 
 ## Features
 
-### Authentication
-- User registration and login
+### Backend
 - JWT-based authentication
-- Protected routes using middleware
-
-### Workspace Management
-- Create workspaces
-- Ownership model (Owner, Admin, Member)
-- List workspaces a user belongs to
-
-### Project Management
+- Workspace management with role-based access
 - Projects inside workspaces
-- Only Owner/Admin can create or delete projects
-- List projects by workspace
+- Task management with status flow: `todo → in_progress → done`
+- Protected REST APIs
+- Modular Express architecture
 
-### Task Management
-- Tasks inside projects
-- Status flow: `todo → in_progress → done`
-- Only workspace members can create tasks
-- Only assignee or Owner/Admin can update task status
+### Frontend
+- React (Vite)
+- Axios for API communication
+- Authentication forms (login / register)
+- UI-driven task and project management
+- Environment-based configuration
 
 ---
 
 ## Tech Stack
 
-- Node.js
-- Express.js
-- MongoDB (Mongoose)
-- JWT Authentication
-- Thunder Client for testing
+| Layer | Technology |
+|------|-----------|
+| Frontend | React, Vite, Axios |
+| Backend | Node.js, Express.js |
+| Database | MongoDB (Mongoose) |
+| Auth | JWT |
+| Tools | npm |
 
 ---
 
 ## Project Structure
-src/
-├── modules/
-│ ├── auth/
-│ ├── workspace/
-│ ├── project/
-│ ├── task/
-│ └── utils/
-├── middlewares/
-├── config/
-├── app.js
-└── server.js
-
+Taskmanager/ ├── backend/ │   ├── src/ │   │   ├── modules/ │   │   ├── middlewares/ │   │   ├── config/ │   │   ├── app.js │   │   └── server.js │   ├── package.json │   └── .env │ ├── frontend/ │   ├── src/ │   ├── index.html │   ├── vite.config.js │   └── package.json │ └── README.md
+Copy code
 
 ---
 
-## Roles & Permissions
+## Prerequisites
 
-- **Owner**
-  - Full control over workspace
-  - Manage admins, members, and projects
-- **Admin**
-  - Manage projects and tasks
-- **Member**
-  - Create and update assigned tasks
-
-> Ownership and roles are enforced server-side using JWT.  
-
+- Node.js (v18+)
+- MongoDB (local or Atlas)
+- npm
 
 ---
 
-## API Endpoints
+## Setup & Run
 
-### Auth
+### 1. Clone Repository
 
+```bash
+git clone https://github.com/Manojuio/Taskmanager.git
+cd Taskmanager
+2. Backend Setup
+Copy code
+Bash
+cd backend
+npm install
+Create .env file:
+Copy code
+Env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+Start backend:
+Copy code
+Bash
+npm start
+Backend URL:
+Copy code
+
+http://localhost:5000
+3. Frontend Setup
+Copy code
+Bash
+cd ../frontend
+npm install
+npm run dev
+Frontend URL:
+Copy code
+
+http://localhost:5173
+Application Flow (Frontend Driven)
+User registers or logs in via UI
+JWT token is stored on the client
+User creates a workspace
+User creates projects inside workspace
+User creates and manages tasks via UI
+Frontend communicates with backend APIs securely
+Frontend ↔ Backend Integration
+Frontend uses Axios to communicate with backend:
+Copy code
+
+http://localhost:5000/api
+Example:
+Copy code
+Js
+axios.get("http://localhost:5000/api/tasks");
+CORS is enabled on the backend to allow frontend requests.
+API Overview (Used Internally by Frontend)
+Auth
 POST /api/auth/register
 POST /api/auth/login
-
-
-### Workspaces
-
-
+Workspaces
 POST /api/workspaces
 GET /api/workspaces
-
-
-### Projects
-
-
+Projects
 POST /api/projects
 GET /api/projects/workspace/:workspaceId
 DELETE /api/projects/:projectId
-
-
-### Tasks
-
-
+Tasks
 POST /api/tasks
 PATCH /api/tasks/:taskId/status
-
-
 All protected routes require:
-
+Copy code
 
 Authorization: Bearer <JWT_TOKEN>
-
-
----
-
-## Environment Variables
-
-Create a `.env` file:
-
-
-
-PORT=3000
-MONGO_URI=your_mongodb_uri
-JWT_SECRET=your_jwt_secret
-
-
----
-
-## Testing
-
-APIs are tested using Thunder Client in the following order:
-1. Register
-2. Login
-3. Create workspace
-4. Create project
-5. Create task
-6. Update task status
-
----
-
-## Future Improvements
-
-- Task assignment
-- Task comments
-- Real-time updates with Socket.io
-- Pagination and filtering
-- Deployment
-
----
-
-## Author
-
-Manoj
-
----
-
-## License
-
+Future Improvements
+Task assignment to users
+Task comments
+Real-time updates (Socket.io)
+Pagination & filtering
+API documentation (Swagger)
+Deployment (Render / Vercel)
+License
 For learning and demonstration purposes.
+Author
+Manoj
+Computer Science student
+Focused on full-stack development
+Copy code
+
+---
+
+### Final reality check
+
+Now the README **matches the architecture**.  
+Next non-negotiables if you want this to matter:
+
+1. `.env.example`
+2. Screenshots of UI
+3. Deployed URL
+
+Skip those → still a student project.  
+Do those → internship-ready.
 
